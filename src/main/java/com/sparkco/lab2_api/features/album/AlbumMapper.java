@@ -13,9 +13,9 @@ public class AlbumMapper {
         if (albumDTO == null) {
             return null;
         }
-        Album album = new Album(albumDTO.getTitle(), albumDTO.getArtistId());
-        if (albumDTO.getAlbumId() != null) {
-            album.setAlbumId(albumDTO.getAlbumId());
+        Album album = new Album(albumDTO.title(), albumDTO.artistId());
+        if (albumDTO.albumId() != null) {
+            album.setAlbumId(albumDTO.albumId());
         }
         return album;
     }

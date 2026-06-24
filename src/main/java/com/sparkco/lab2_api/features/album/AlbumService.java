@@ -35,8 +35,8 @@ public class AlbumService {
         Optional<Album> existingAlbum = albumRepository.findById(albumId);
         if (existingAlbum.isPresent()) {
             Album album = existingAlbum.get();
-            album.setTitle(albumDTO.getTitle());
-            album.setArtistId(albumDTO.getArtistId());
+            album.setTitle(albumDTO.title());
+            album.setArtistId(albumDTO.artistId());
             Album updatedAlbum = albumRepository.save(album);
             return AlbumMapper.toDTO(updatedAlbum);
         }
