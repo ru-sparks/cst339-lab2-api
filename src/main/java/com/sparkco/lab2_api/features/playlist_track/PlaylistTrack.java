@@ -1,42 +1,58 @@
 package com.sparkco.lab2_api.features.playlist_track;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "playlist_track")
 public class PlaylistTrack {
 
-    @Id
-    @Column(name = "playlist_id")
-    private Integer playlistId;
-    @Id
-    @Column(name = "track_id")
-    private Integer trackId;
+    @EmbeddedId
+    private PlaylistTrackId id;
+
+    public PlaylistTrack() {
+    }
+
+    public PlaylistTrack(PlaylistTrackId id) {
+        this.id = id;
+    }
 
     public Integer getPlaylistId() {
-        return this.playlistId;
+        return this.id != null ? this.id.getPlaylistId() : null;
     }
 
     public void setPlaylistId(Integer playlistId) {
-        this.playlistId = playlistId;
+        if (this.id == null) {
+            this.id = new PlaylistTrackId();
+        }
+        this.id.setPlaylistId(playlistId);
     }
 
     public Integer getTrackId() {
-        return this.trackId;
+        return this.id != null ? this.id.getTrackId() : null;
     }
 
     public void setTrackId(Integer trackId) {
-        this.trackId = trackId;
+        if (this.id == null) {
+            this.id = new PlaylistTrackId();
+        }
+        this.id.setTrackId(trackId);
+    }
+
+    public PlaylistTrackId getId() {
+        return id;
+    }
+
+    public void setId(PlaylistTrackId id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "PlaylistTrack{" +
-                "playlistId=" + playlistId +
-                ", trackId=" + trackId +
+                "playlistId=" + getPlaylistId() +
+                ", trackId=" + getTrackId() +
                 '}';
     }
 }
